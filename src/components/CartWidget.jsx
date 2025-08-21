@@ -3,7 +3,8 @@ function CartWidget (){
     return (
         <div>
             <img style={{
-                position:"relative"
+                position:"relative",
+                cursor: "pointer"
             }}
             src="https://img.icons8.com/?size=100&id=2tUDsxpnBvDz&format=png&color=000000" alt="Icon for a shopping cart" height="58"/>
             <span style={{
