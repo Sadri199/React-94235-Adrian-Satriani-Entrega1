@@ -1,45 +1,34 @@
+import { NavLink } from "react-router"
 import CartWidget from "./CartWidget"
-import "../App.css"
+import { NavigationMenu,
+    NavigationMenuItem, 
+    NavigationMenuTrigger, 
+    NavigationMenuContent, 
+    NavigationMenuLink } from "./ui/navigation-menu"
 
-function NavBar () {
-    const styleLi = {
-        listStyle: "none",
-        marginRight: "15%",
-        padding: 0,
-        display: "inline",
-        fontSize: "1.4rem",
-        overflowWrap: "break-word"
-    }
-    const styleA = {
-        textDecoration: "inherit",
-        color: "inherit"
-    }
+
+
+function NavBar ({categoryName}) {
 
     return (
-        <div style={{
-            display: "flex",
-            alignItems: "stretch",
-            justifyContent: "center",
-            flexDirection: "row",
-            paddingBottom: 20
-        }}>
-        <p style={{
-            display: "inline",
-            fontSize:"1.3rem",
-            textWrap: "wrap",
-            wordBreak: "break-word"
-        }}>Ravens Black Market</p>
-        <ul style={{
-            flexGrow: 1,
-            flexBasis: "100%",
-        }}>
-            <li className="oxanium-li" style={styleLi}>
-                <a href="#" style={styleA}>AC Parts</a></li>
-            <li className="oxanium-li" style={styleLi}>
-                <a href="#" style={styleA}>Weapons</a></li>
-            <li className="oxanium-li" style={styleLi}>
-                <a href="#" style={styleA}>Optional Parts</a></li>
-        </ul>
+        <div className="grid w-[200px] gap-4">
+        <p >Ravens Black Market</p>
+        <NavigationMenu>
+            <NavigationMenuItem>
+                <NavigationMenuTrigger>Our Categories</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                    <ul>
+                    <li>
+                        {categoryName.map((category, index) => 
+                        <NavigationMenuLink key={index} asChild>
+                            <NavLink href="#" >{category}</NavLink>
+                        </NavigationMenuLink>
+                        )}
+                    </li>
+                    </ul>
+                </NavigationMenuContent>
+            </NavigationMenuItem>
+        </NavigationMenu>
         <CartWidget />
         </div>
     )
