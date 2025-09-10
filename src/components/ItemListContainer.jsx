@@ -1,17 +1,27 @@
-import { Button } from "./ui/button"
+import ItemList from "./ItemList"
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
-function ItemListContainer ({text}) {
+function ItemListContainer () {
+    const id = useParams () //Validar que está fallando 
+
+    const [products, setProducts] = useState()
+
+    const urlAllProducts = "https://dummyjson.com/products"
+
+    const urlProductsByCategory = `https://dummyjson.com/products/category/${id}`
+    
+    useEffect( () => {
+        fetch(id ? urlProductsByCategory : urlAllProducts)
+            .then(res => res.json())
+            .then(console.log);
+        
+    },[id]
+    )
+
 
     return (
-        <>
-        <p style={{
-            fontSize:"1.4rem",
-            wordBreak: "break-word",
-            whiteSpace: "pre-line",
-            borderStyle: "inset",
-            color: "rgb(208, 225, 225)"}} className="bg-primary">{text}</p>
-            <Button>ShadCN </Button>
-        </>
+        <ItemList products={products} />
     )
 }
 
