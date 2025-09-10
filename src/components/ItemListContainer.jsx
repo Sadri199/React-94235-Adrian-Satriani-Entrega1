@@ -1,25 +1,28 @@
 import ItemList from "./ItemList"
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useEffect, useState } from "react"
+import { useParams } from "react-router"
 
 function ItemListContainer () {
-    const id = useParams () //Validar que está fallando 
+    const {id} = useParams ()
 
-    const [products, setProducts] = useState()
+    const [products, setProducts] = useState([])
 
-    const urlAllProducts = "https://dummyjson.com/products"
-
-    const urlProductsByCategory = `https://dummyjson.com/products/category/${id}`
-    
     useEffect( () => {
+        const urlAllProducts = "https://dummyjson.com/products"
+        const urlProductsByCategory = `https://dummyjson.com/products/category/${id}`
+        
         fetch(id ? urlProductsByCategory : urlAllProducts)
             .then(res => res.json())
-            .then(console.log);
+            .then(data => setProducts(data.products))
         
     },[id]
     )
 
-
+    if(!products){
+        return (<div>
+            aca nunca entra
+        </div>)
+    }
     return (
         <ItemList products={products} />
     )

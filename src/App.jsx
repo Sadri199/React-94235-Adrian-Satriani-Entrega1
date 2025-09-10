@@ -10,7 +10,9 @@ function App() {
     <BrowserRouter>
       <NavBarContainer />
       <Routes>
-        <Route path="/" element={<ItemListContainer text={"Ok so, nothing here right now but eventually here would appear the items. \n My idea is something like these:\nPart Type: Legs\nPart ID: ZLN-XA2/FF\nPrice: 45600C\n"}  />} />
+        <Route path="/" element={<ItemListContainer />} />
+        <Route path="/category/:id" element={<ItemListContainer />} />
+        <Route path="/product/:id" element={<ItemListContainer />} /> //ItemDetailContainer
       </Routes>
   </BrowserRouter>
     </>

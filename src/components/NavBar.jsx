@@ -1,4 +1,4 @@
-import { NavLink } from "react-router"
+import { NavLink, Link } from "react-router"
 import CartWidget from "./CartWidget"
 import { NavigationMenu,
     NavigationMenuItem, 
@@ -12,7 +12,7 @@ function NavBar ({categoryName}) {
 
     return (
         <div className="grid w-[200px] gap-4">
-        <p >Ravens Black Market</p>
+        <Link to={"/"}>Ravens Black Market</Link>
         <NavigationMenu>
             <NavigationMenuItem>
                 <NavigationMenuTrigger>Our Categories</NavigationMenuTrigger>
@@ -21,7 +21,7 @@ function NavBar ({categoryName}) {
                     <li>
                         {categoryName.map((category, index) => 
                         <NavigationMenuLink key={index} asChild>
-                            <NavLink href="#" >{category}</NavLink>
+                            <NavLink to={`/category/${category}`} >{category}</NavLink>
                         </NavigationMenuLink>
                         )}
                     </li>
