@@ -2,11 +2,11 @@ function CartWidget (){
 
     return (
         <div>
-            <img style={{
+            <p style={{
                 position:"relative",
                 cursor: "pointer"
-            }}
-            src="https://img.icons8.com/?size=100&id=2tUDsxpnBvDz&format=png&color=000000" alt="Icon for a shopping cart" height="58"/>
+            }}>📩</p>
+        
             <span style={{
                 position:"absolute",
                 top: 9,

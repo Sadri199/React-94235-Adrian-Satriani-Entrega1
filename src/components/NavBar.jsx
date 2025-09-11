@@ -11,7 +11,7 @@ import { NavigationMenu,
 function NavBar ({categoryName}) {
 
     return (
-        <div className="grid w-[200px] gap-4">
+        <div className="grid grid-cols-3 grid-rows-1 w-full gap-4">
         <Link to={"/"}>Ravens Black Market</Link>
         <NavigationMenu>
             <NavigationMenuItem>

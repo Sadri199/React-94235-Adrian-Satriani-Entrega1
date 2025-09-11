@@ -1,26 +1,22 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
+import ItemDetail from "./ItemDetail"
 
 function ItemDetailContainer() {
-    
-    const {id} = useParams ()
 
+    const {id} = useParams ()
     const [product, setProduct] = useState()
 
     useEffect( () => {
         const urlProduct = `https://dummyjson.com/products/${id}`
-        
         fetch(urlProduct)
             .then(res => res.json())
-            .then(data => setProduct(data.products))
+            .then(data => setProduct(data))
         
-    },[id]
-    )
+    },[id])
     
     return ( 
-        <>
-        <p>{product}</p>
-        </>
+        <ItemDetail product={product}/>
     )
 }
 
