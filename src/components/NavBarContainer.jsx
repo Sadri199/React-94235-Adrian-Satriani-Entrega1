@@ -5,10 +5,13 @@ import NavBar from "./NavBar";
 function NavBarContainer() {
     const [categoryName , setCategoryName] = useState([])
 
+    
     useEffect( ()=> {
-        fetch('https://dummyjson.com/products/category-list')
-            .then(res => res.json())
-            .then(data => setCategoryName(data));
+        setTimeout(()=>
+            fetch('https://dummyjson.com/products/category-list')
+                .then(res => res.json())
+                .then(data => setCategoryName(data))
+            ,500)
 
     }, [])
 

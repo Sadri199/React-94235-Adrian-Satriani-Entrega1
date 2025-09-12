@@ -1,25 +1,45 @@
+import { Link } from "react-router" 
 import { CornerDownRight } from "lucide-react"
-import { Link } from "react-router"
 import Card from 'react-bootstrap/Card'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Placeholder from 'react-bootstrap/Placeholder'
 
 function ItemList({products}) {
 
+    if(products.length==0){
+        return(
+            <Card aria-hidden="true" border="secondary" style={{ width: '50%', height: '30%' }}>
+                <Card.Body>
+                    <Placeholder as={Card.Title} animation="glow">
+                        <Placeholder xs={12} />
+                    </Placeholder>
+                    <Placeholder as={Card.Subtitle} animation="glow">
+                        <Placeholder xs={12} />
+                    </Placeholder>
+                </Card.Body>
+            </Card>
+        )
+    }
+
     return (
         <div>
-            {products.map((product)=>
-                <Card key={product?.id} style={{ width: '18rem' }}>
+            <Row xs={1} md={2} xl={4} className="g-4">
+                {products.map((product)=>
+                <Col key={product?.id}>
+                <Card key={product?.id} border="secondary" style={{ width: '18rem' }}>
                     <Card.Body>
                         <Card.Img variant="top" src={product?.thumbnail} />
                         <Card.Title>{product?.title}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{product?.category}</Card.Subtitle>
-                        <Card.Link as={Link}>
-                            <Link to={`/product/${product?.id}`}>
+                        <Card.Link className="text-bg-light link-body-emphasis link-underline link-underline-opacity-0" as={Link} to={`/product/${product?.id}`}>
                                 <CornerDownRight/>See More
-                            </Link>
                         </Card.Link>
                     </Card.Body>
                 </Card>
+                </Col>
             )}
+            </Row>
         </div>
     )
 }

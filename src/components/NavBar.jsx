@@ -4,21 +4,46 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import Spinner from 'react-bootstrap/Spinner'
+import { Origami } from "lucide-react"
+
 
 function NavBar ({categoryName}) {
 
+    if(categoryName.length==0){
+        return (
+            <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary mb-2">
+                <Container fluid>
+                    <Navbar.Brand as={Link} to={"/"}>Ravens Black Market</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse className="mx-4" id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <NavDropdown title="Our Categories" id="collapsible-nav-dropdown">
+                                    <NavDropdown.Item className="d-flex justify-content-center">
+                                        <Spinner animation="border" variant="secondary" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                    </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>    
+        )
+    }
+
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
-            <Container>
-                <Navbar.Brand as={Link}>
-                    <Link to={"/"}>Ravens Black Market</Link>
+        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary mb-2">
+            <Container fluid>
+                <Navbar.Brand as={Link} to={"/"}>
+                    <Origami />Ravens Black Market
                 </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse className="mx-4" id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <NavDropdown title="Our Categories" id="basic-nav-dropdown">
+                        <NavDropdown title="Our Categories" id="collapsible-nav-dropdown">
                             {categoryName.map((category, index) => 
-                                <NavDropdown.Item as={NavLink} to={`/category/${category}`} key={index} >
+                                <NavDropdown.Item className="text-capitalize" as={NavLink} to={`/category/${category}`} key={index} >
                                     {category}
                                 </NavDropdown.Item>
                             )}

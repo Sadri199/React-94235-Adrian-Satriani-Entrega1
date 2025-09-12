@@ -1,22 +1,15 @@
+import { ShoppingBasket } from "lucide-react"
+import Button from 'react-bootstrap/Button'
+import Badge from 'react-bootstrap/Badge'
+
 function CartWidget (){
 
     return (
         <div>
-            <p style={{
-                position:"relative",
-                cursor: "pointer"
-            }}>📩</p>
-        
-            <span style={{
-                position:"absolute",
-                top: 9,
-                right: 7,
-                backgroundColor: "#fa3e3e",
-                borderRadius: 2,
-                color: "white",
-                fontSize: 15,
-                padding: 1
-            }}>5</span>
+        <Button variant="outline-success" size="lg">
+          <ShoppingBasket />
+          <Badge className="ms-1" bg="secondary">5</Badge>
+        </Button>
         </div>
     )
 }

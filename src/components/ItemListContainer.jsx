@@ -11,18 +11,16 @@ function ItemListContainer () {
         const urlAllProducts = "https://dummyjson.com/products"
         const urlProductsByCategory = `https://dummyjson.com/products/category/${id}`
         
-        fetch(id ? urlProductsByCategory : urlAllProducts)
-            .then(res => res.json())
-            .then(data => setProducts(data.products))
+        setTimeout(()=>
+            
+            fetch(id ? urlProductsByCategory : urlAllProducts)
+                .then(res => res.json())
+                .then(data => setProducts(data.products))
+            , 500)
         
     },[id]
     )
 
-    if(!products){
-        return (<div>
-            aca nunca entra
-        </div>)
-    }
     return (
         <ItemList products={products} />
     )

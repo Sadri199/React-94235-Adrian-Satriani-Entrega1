@@ -9,9 +9,12 @@ function ItemDetailContainer() {
 
     useEffect( () => {
         const urlProduct = `https://dummyjson.com/products/${id}`
-        fetch(urlProduct)
-            .then(res => res.json())
-            .then(data => setProduct(data))
+
+        setTimeout(()=>
+            fetch(urlProduct)
+                .then(res => res.json())
+                .then(data => setProduct(data))
+            , 3000)
         
     },[id])
     
