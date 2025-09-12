@@ -1,35 +1,25 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import { CornerDownRight } from "lucide-react"
-import { Button } from "./ui/button"
 import { Link } from "react-router"
+import Card from 'react-bootstrap/Card'
 
 function ItemList({products}) {
 
     return (
-        <div className="flex-2/12">
-            {products.map((product) => 
-                    <Card className="w-full max-w-sm" key={product?.id} >
-                        <CardHeader>
-                            <CardTitle>{product?.title}</CardTitle>
-                            <CardDescription>{product?.category}</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <img src={product?.thumbnail} />
-                        </CardContent>
-                        <Button asChild>
+        <div>
+            {products.map((product)=>
+                <Card key={product?.id} style={{ width: '18rem' }}>
+                    <Card.Body>
+                        <Card.Img variant="top" src={product?.thumbnail} />
+                        <Card.Title>{product?.title}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{product?.category}</Card.Subtitle>
+                        <Card.Link as={Link}>
                             <Link to={`/product/${product?.id}`}>
-                                <CornerDownRight/>
-                                <p>More info </p>
+                                <CornerDownRight/>See More
                             </Link>
-                        </Button>
-                    </Card>
-                )}  
+                        </Card.Link>
+                    </Card.Body>
+                </Card>
+            )}
         </div>
     )
 }

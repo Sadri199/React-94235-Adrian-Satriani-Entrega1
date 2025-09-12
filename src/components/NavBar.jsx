@@ -1,36 +1,34 @@
 import { NavLink, Link } from "react-router"
 import CartWidget from "./CartWidget"
-import { NavigationMenu,
-    NavigationMenuItem, 
-    NavigationMenuTrigger, 
-    NavigationMenuContent, 
-    NavigationMenuLink } from "./ui/navigation-menu"
-
-
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 function NavBar ({categoryName}) {
 
     return (
-        <div className="grid grid-cols-3 grid-rows-1 w-full gap-4">
-        <Link to={"/"}>Ravens Black Market</Link>
-        <NavigationMenu>
-            <NavigationMenuItem>
-                <NavigationMenuTrigger>Our Categories</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                    <ul>
-                    <li>
-                        {categoryName.map((category, index) => 
-                        <NavigationMenuLink key={index} asChild>
-                            <NavLink to={`/category/${category}`} >{category}</NavLink>
-                        </NavigationMenuLink>
-                        )}
-                    </li>
-                    </ul>
-                </NavigationMenuContent>
-            </NavigationMenuItem>
-        </NavigationMenu>
-        <CartWidget />
-        </div>
+        <Navbar expand="lg" className="bg-body-tertiary">
+            <Container>
+                <Navbar.Brand as={Link}>
+                    <Link to={"/"}>Ravens Black Market</Link>
+                </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <NavDropdown title="Our Categories" id="basic-nav-dropdown">
+                            {categoryName.map((category, index) => 
+                                <NavDropdown.Item as={NavLink} to={`/category/${category}`} key={index} >
+                                    {category}
+                                </NavDropdown.Item>
+                            )}
+                            <NavDropdown.Divider />
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
+                <CartWidget/>
+            </Container>
+        </Navbar>
     )
 }
 
