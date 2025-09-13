@@ -24,9 +24,9 @@ function ItemList({products}) {
 
     return (
         <div>
-            <Row xs={1} md={2} xl={4} className="g-4">
+            <Row className="g-4">
                 {products.map((product)=>
-                <Col key={product?.id}>
+                <Col xs lg={true} key={product?.id} className="ms-5 ms-md-2">
                 <Card key={product?.id} border="secondary" style={{ width: '18rem' }}>
                     <Card.Body>
                         <Card.Img variant="top" src={product?.thumbnail} />
