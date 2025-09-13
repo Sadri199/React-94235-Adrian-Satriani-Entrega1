@@ -14,7 +14,7 @@ function ItemDetailContainer() {
             fetch(urlProduct)
                 .then(res => res.json())
                 .then(data => setProduct(data))
-            , 3000)
+            , 500)
         
     },[id])
     

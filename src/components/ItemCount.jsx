@@ -1,45 +1,32 @@
 import { SquarePlus } from "lucide-react"
 import Button from 'react-bootstrap/Button'
-import Alert from 'react-bootstrap/Alert' //Cambiar por toastify
-import { useState } from "react"
+import Badge from 'react-bootstrap/Badge'  
+import { ToastContainer, toast } from 'react-toastify'
 
-function ItemCount() {
-    const [quantity, setQuantity] = useState (0)
-    const [isButtonDisabled, setButtonDisabled] = useState(false);
-    const [disableVariant, setDisableVariant] = useState("danger")
-    const [alert, setAlert] = useState()
+function ItemCount({props}) {
+    
+        const notify = () => toast.success(`Adding ${props.quantity} products to the cart...just kidding`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        })
 
-    const handleClickMinus = () => {
-        if (quantity > 0){
-        setQuantity (quantity - 1)
-        setButtonDisabled (false)
-        setDisableVariant ("danger")
-        }
-        else {
-            setButtonDisabled (true)
-            setDisableVariant ("dark")
-        }
-    }
-    const handleClickPlus = () => {
-        setButtonDisabled (false)
-        setDisableVariant ("danger")
-        setQuantity (quantity +1)
-        }
-    const handleAlert = () => {
-
-        setAlert(<Alert variant="success" dismissible="true">Product added to cart...just kidding, it doesn't work</Alert>)
-    }
-
-    return (
-    <div>
-        {alert}
-        <p>{quantity}</p>
-        <Button onClick={handleClickMinus} disable={isButtonDisabled} variant={disableVariant}> - </Button>
-        <Button onClick={handleClickPlus} variant={"info"}> + </Button>
-        <Button onClick={handleAlert} variant={"success"}>
+    return (  
+<div>
+        <ToastContainer/>
+        <Button className="mx-2" onClick={props.handleClickMinus} disabled={props.isButtonDisabled} variant={props.disableVariant}> - </Button>
+        <Button className="mx-2" onClick={props.handleClickPlus} variant={"info"}> + </Button>
+        <Button className="mx-2" onClick={notify} variant={"success"}>
             <SquarePlus /> Add to Cart
+            <Badge className="ms-2" bg="secondary">{props.quantity}</Badge>
         </Button>
-    </div>)
+    </div>
+    )
 }
 
 export default ItemCount
