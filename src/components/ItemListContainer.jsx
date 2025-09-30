@@ -1,6 +1,7 @@
 import ItemList from "./ItemList"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
+import { getAllDocs } from "../firebase/db"
 
 function ItemListContainer () {
     const {id} = useParams ()
@@ -8,16 +9,8 @@ function ItemListContainer () {
     const [products, setProducts] = useState([])
 
     useEffect( () => {
-        const urlAllProducts = "https://dummyjson.com/products"
-        const urlProductsByCategory = `https://dummyjson.com/products/category/${id}`
-        
-        setTimeout(()=>
-            
-            fetch(id ? urlProductsByCategory : urlAllProducts)
-                .then(res => res.json())
-                .then(data => setProducts(data.products))
-            , 500)
-        
+        getAllDocs("acParts")
+            .then(data => setProducts(data))
     },[id]
     )
 

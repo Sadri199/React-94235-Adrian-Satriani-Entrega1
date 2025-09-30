@@ -26,12 +26,13 @@ function ItemList({products}) {
         <div>
             <Row className="g-4">
                 {products.map((product)=>
-                <Col xs lg={true} key={product?.id} className="ms-5 ms-md-2">
+                <Col xs={3} key={product?.id} className="ms-5 ms-md-2">
                 <Card key={product?.id} border="secondary" style={{ width: '18rem' }}>
                     <Card.Body>
-                        <Card.Img variant="top" src={product?.thumbnail} />
-                        <Card.Title>{product?.title}</Card.Title>
+                        <Card.Img variant="top" src={product?.image} />
+                        <Card.Title>{product?.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{product?.category}</Card.Subtitle>
+                        <Card.Text className='mb-4'>{product?.price} C</Card.Text>
                         <Card.Link className="text-bg-light link-body-emphasis link-underline link-underline-opacity-0" as={Link} to={`/product/${product?.id}`}>
                                 <CornerDownRight/>See More
                         </Card.Link>

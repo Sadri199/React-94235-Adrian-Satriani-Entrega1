@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import NavBar from "./NavBar";
+import { useEffect, useState } from "react"
+import NavBar from "./NavBar"
+import { getAllDocs } from "../firebase/db"
 
 
 function NavBarContainer() {
@@ -7,12 +8,8 @@ function NavBarContainer() {
 
     
     useEffect( ()=> {
-        setTimeout(()=>
-            fetch('https://dummyjson.com/products/category-list')
-                .then(res => res.json())
-                .then(data => setCategoryName(data))
-            ,500)
-
+        getAllDocs("categories")
+            .then (data => setCategoryName(data))
     }, [])
 
     return ( 

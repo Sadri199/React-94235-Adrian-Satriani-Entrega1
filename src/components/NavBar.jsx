@@ -42,9 +42,9 @@ function NavBar ({categoryName}) {
                 <Navbar.Collapse className="mx-4" id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <NavDropdown title="Our Categories" id="collapsible-nav-dropdown">
-                            {categoryName.map((category, index) => 
-                                <NavDropdown.Item className="text-capitalize" as={NavLink} to={`/category/${category}`} key={index} >
-                                    {category}
+                            {categoryName.map((category) => 
+                                <NavDropdown.Item className="text-capitalize" as={NavLink} to={`/category/${category.categoryName}`} key={category.id} >
+                                    {category.categoryName}
                                 </NavDropdown.Item>
                             )}
                             <NavDropdown.Divider />
