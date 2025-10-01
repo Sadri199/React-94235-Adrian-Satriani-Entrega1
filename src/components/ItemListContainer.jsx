@@ -1,7 +1,7 @@
 import ItemList from "./ItemList"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { getAllDocs } from "../firebase/db"
+import { getAllDocs, filterProducts } from "../firebase/db"
 
 function ItemListContainer () {
     const {id} = useParams ()
@@ -9,8 +9,13 @@ function ItemListContainer () {
     const [products, setProducts] = useState([])
 
     useEffect( () => {
-        getAllDocs("acParts")
-            .then(data => setProducts(data))
+        if (id) {
+            filterProducts(id)
+                .then(data => setProducts(data))
+        } else {
+            getAllDocs("acParts")
+                .then(data => setProducts(data))
+        }
     },[id]
     )
 

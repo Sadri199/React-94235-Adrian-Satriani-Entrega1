@@ -1,17 +1,63 @@
-import { getFirestore, collection, getDocs } from "firebase/firestore"
+import { getFirestore, 
+        collection, 
+        getDocs, 
+        query, 
+        where, 
+        or, 
+        doc, 
+        getDoc } from "firebase/firestore"
 import { app } from "./config"
 
 const db = getFirestore(app)
 
 export const getAllDocs = async (firebaseCollection) => {
-    const querySnapshot = await getDocs(collection(db, firebaseCollection))
     const documents = []
 
-    querySnapshot.forEach((doc) => {
-    documents.push({...doc.data(), id: doc.id})
-    })
+    try{
+        const querySnapshot = await getDocs(collection(db, firebaseCollection))
+
+        querySnapshot.forEach((doc) => {
+        documents.push({...doc.data(), id: doc.id})
+        })
+    } catch (error){
+        console.log(error) //Reemplazar por toast
+    }
 
     return documents
 }
 
-//Realizar query para filtrar productos por categorias y brands
+export const filterProducts = async (param) => {
+    const dashForSpace = param.replaceAll('-', ' ')
+
+    const queryAll = query(collection(db, "acParts"), 
+        or (where("category", "==", dashForSpace), where("brand", "==", param)))
+    const documents = []
+
+    try{
+        const querySnapshot = await getDocs(queryAll)
+    
+        querySnapshot.forEach((doc) => {
+        documents.push({...doc.data(), id: doc.id})
+        })
+    } catch (error){
+        console.log(error) //Reemplazar por toast
+    }
+
+    return documents
+}
+
+export const getSingleProduct = async (id) => {
+
+    const docRef = doc(db, "acParts", id)
+    try{
+        const docSnap = await getDoc(docRef)
+
+        if (docSnap.exists()) {
+        return {...docSnap.data(), id: docSnap.id}
+        } else {
+        console.log("Algo salio mal") //Reemplazar por toast
+        }
+    } catch (error){
+        console.log(error) //Reemplazar por toast
+    }
+}

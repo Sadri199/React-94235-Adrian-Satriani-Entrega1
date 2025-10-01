@@ -8,7 +8,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { Origami } from "lucide-react"
 
 
-function NavBar ({categoryName}) {
+function NavBar ({categoryName, brandName}) {
 
     if(categoryName.length==0){
         return (
@@ -19,6 +19,18 @@ function NavBar ({categoryName}) {
                     <Navbar.Collapse className="mx-4" id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <NavDropdown title="Our Categories" id="collapsible-nav-dropdown">
+                                    <NavDropdown.Item className="d-flex justify-content-center">
+                                        <Spinner animation="border" variant="secondary" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                    </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse className="mx-4" id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <NavDropdown title="Our Partners" id="collapsible-nav-dropdown">
                                     <NavDropdown.Item className="d-flex justify-content-center">
                                         <Spinner animation="border" variant="secondary" role="status">
                                             <span className="visually-hidden">Loading...</span>
@@ -44,10 +56,21 @@ function NavBar ({categoryName}) {
                         <NavDropdown title="Our Categories" id="collapsible-nav-dropdown">
                             {categoryName.map((category) => 
                                 <NavDropdown.Item className="text-capitalize" as={NavLink} to={`/category/${category.categoryName}`} key={category.id} >
-                                    {category.categoryName}
+                                    {category.categoryName.replaceAll('-', ' ')}
                                 </NavDropdown.Item>
                             )}
-                            <NavDropdown.Divider />
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
+                                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse className="mx-4" id="responsive-navbar-nav">
+                    <Nav className="me-auto">
+                        <NavDropdown title="Our Partners" id="collapsible-nav-dropdown">
+                            {brandName.map((brand) => 
+                                <NavDropdown.Item className="text-capitalize" as={NavLink} to={`/brand/${brand.brandName}`} key={brand.id} >
+                                    {brand.brandName.replaceAll('-', ' ')}
+                                </NavDropdown.Item>
+                            )}
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
