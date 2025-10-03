@@ -1,7 +1,6 @@
 import { SquarePlus } from "lucide-react"
 import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge'
-import { ToastContainer } from 'react-toastify'
 
 function ItemCount({props}) {
     
@@ -9,7 +8,6 @@ function ItemCount({props}) {
 
     return (  
     <div>
-        <ToastContainer/>
         <Button className="mx-2" onClick={props.handleClickMinus} disabled={props.isButtonDisabled} variant={props.disableVariant}> - </Button>
         <Button className="mx-2" onClick={props.handleClickPlus} variant={"info"}> + </Button>
         <Button className="mx-2" onClick={props.handleClickAdd} variant={"success"}>

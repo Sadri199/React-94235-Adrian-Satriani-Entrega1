@@ -5,7 +5,9 @@ import { getFirestore,
         where, 
         or, 
         doc, 
-        getDoc } from "firebase/firestore"
+        getDoc,
+        addDoc } from "firebase/firestore"
+import { notifyNewOrder, notifyDBError } from "../toasts/toast"
 import { app } from "./config"
 
 const db = getFirestore(app)
@@ -20,7 +22,7 @@ export const getAllDocs = async (firebaseCollection) => {
         documents.push({...doc.data(), id: doc.id})
         })
     } catch (error){
-        console.log(error) //Reemplazar por toast
+        notifyDBError(error)
     }
 
     return documents
@@ -40,7 +42,7 @@ export const filterProducts = async (param) => {
         documents.push({...doc.data(), id: doc.id})
         })
     } catch (error){
-        console.log(error) //Reemplazar por toast
+        notifyDBError(error)
     }
 
     return documents
@@ -55,9 +57,20 @@ export const getSingleProduct = async (id) => {
         if (docSnap.exists()) {
         return {...docSnap.data(), id: docSnap.id}
         } else {
-        console.log("Algo salio mal") //Reemplazar por toast
+        notifyDBError("We couldn't find that product!")
         }
     } catch (error){
-        console.log(error) //Reemplazar por toast
+        notifyDBError(error)
+    }
+}
+
+export const postOrder = async (order) => {
+    try{
+        const docRef = await addDoc(collection(db, "orders"), {order})
+        notifyNewOrder(docRef.id)
+        return true
+    } catch (error){
+        notifyDBError(error)
+        return false
     }
 }
