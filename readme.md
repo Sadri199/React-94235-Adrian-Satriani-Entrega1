@@ -1,7 +1,7 @@
 # React "Ravens Black Market" E-commerce SPA Project (for Coderhouse's React Course)
 
 This is a **Single Page Application (SPA)** built with [Vite](https://vitejs.dev/) and [React](https://react.dev/).  
-It’s a project based on the "Armored Core" franchise, for a React Course that I'm doing in Coderhouse. 
+It’s a project based on the "Armored Core" franchise, for a React Course that I'm doing in [Coderhouse](https://www.coderhouse.com/uy/). 
 It mimics an e-commerce platform that has routing, UI components, and user interactions using some libraries.
 
 ---
